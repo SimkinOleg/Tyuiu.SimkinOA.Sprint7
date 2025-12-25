@@ -16,6 +16,7 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
         public FormFunction()
         {
             InitializeComponent();
+            ApplyColorScheme();
         }
 
         private void buttonCloseTut_SOA_Click(object sender, EventArgs e)
@@ -86,5 +87,36 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                 }
             }
         }
+
+        private void ApplyColorScheme()
+        {
+            this.BackColor = Color.FromArgb(240, 245, 249);
+
+            // График
+            chartPrice_SOA.BackColor = Color.FromArgb(240, 245, 249);
+            chartPrice_SOA.ChartAreas[0].BackColor = Color.FromArgb(240, 245, 249);
+            chartPrice_SOA.ChartAreas[0].AxisX.LineColor = Color.FromArgb(41, 128, 185);
+            chartPrice_SOA.ChartAreas[0].AxisY.LineColor = Color.FromArgb(41, 128, 185);
+            chartPrice_SOA.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.FromArgb(41, 128, 185);
+            chartPrice_SOA.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.FromArgb(41, 128, 185);
+            chartPrice_SOA.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(41, 128, 185);
+            chartPrice_SOA.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(41, 128, 185);
+
+            // Заголовок графика
+            chartPrice_SOA.Titles[0].ForeColor = Color.FromArgb(41, 128, 185);
+
+            // Легенда
+            chartPrice_SOA.Legends[0].ForeColor = Color.FromArgb(41, 128, 185);
+
+            // Кнопка закрытия
+            buttonCloseTut_SOA.BackColor = Color.FromArgb(231, 76, 60);
+            buttonCloseTut_SOA.ForeColor = Color.White;
+            buttonCloseTut_SOA.FlatStyle = FlatStyle.Flat;
+            buttonCloseTut_SOA.FlatAppearance.BorderSize = 0;
+            buttonCloseTut_SOA.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+        }
+
+
+
     }
 }

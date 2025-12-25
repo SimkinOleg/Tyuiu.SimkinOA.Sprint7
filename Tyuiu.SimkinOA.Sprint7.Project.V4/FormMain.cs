@@ -7,6 +7,7 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
         public FormMain()
         {
             InitializeComponent();
+            ApplyColorScheme();
         }
 
         public string openFilePath;
@@ -108,7 +109,7 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                 MessageBox.Show("Файл успешно сохранен!", "Успех",
                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+
         }
 
 
@@ -238,5 +239,81 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             formf.Show();
 
         }
+
+        private void ApplyColorScheme()
+        {
+            // Фон формы
+            this.BackColor = Color.FromArgb(240, 245, 249);
+
+            // Стиль для всех GroupBox
+            foreach (Control control in this.Controls)
+            {
+                if (control is GroupBox groupBox)
+                {
+                    groupBox.ForeColor = Color.FromArgb(41, 128, 185);
+                    groupBox.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                }
+            }
+
+            // Панель сверху
+            panelTop_SOA.BackColor = Color.FromArgb(52, 152, 219);
+
+            // ВСЕ КНОПКИ - СИНИЙ ЦВЕТ (#3498DB)
+            Color mainButtonColor = Color.FromArgb(52, 152, 219);
+
+            // Панель инструментов
+            buttonOpenFile_SOA.BackColor = mainButtonColor;
+            buttonSaveFile_SOA.BackColor = mainButtonColor;
+            buttonHelp_SOA.BackColor = mainButtonColor;
+            buttonTutorial_SOA.BackColor = mainButtonColor;
+
+            // Блок статистики
+            buttonBookMax_SOA.BackColor = mainButtonColor;
+            buttonMax_SOA.BackColor = mainButtonColor;
+            buttonMin_SOA.BackColor = mainButtonColor;
+            buttonMiddle_SOA.BackColor = mainButtonColor;
+            buttonCount_SOA.BackColor = mainButtonColor;
+            buttonFunction_SOA.BackColor = mainButtonColor;
+
+            // Блок поиска
+            buttonSearch_SOA.BackColor = mainButtonColor;
+
+            // Текст на всех кнопках
+            foreach (Control control in panelTop_SOA.Controls)
+            {
+                if (control is Button btn)
+                {
+                    btn.ForeColor = Color.White;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderSize = 0;
+                    btn.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                }
+            }
+
+            // Кнопки вне панели тоже стилизуем
+            buttonBookMax_SOA.ForeColor = Color.White;
+            buttonMax_SOA.ForeColor = Color.White;
+            buttonMin_SOA.ForeColor = Color.White;
+            buttonMiddle_SOA.ForeColor = Color.White;
+            buttonCount_SOA.ForeColor = Color.White;
+            buttonFunction_SOA.ForeColor = Color.White;
+            buttonSearch_SOA.ForeColor = Color.White;
+
+            // DataGridView
+            dataGridViewData_SOA.BackgroundColor = Color.FromArgb(240, 245, 249);
+            dataGridViewData_SOA.GridColor = Color.FromArgb(200, 200, 200);
+            dataGridViewData_SOA.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
+            dataGridViewData_SOA.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewData_SOA.EnableHeadersVisualStyles = false;
+
+            // Текстовые поля
+            textBoxNumber_SOA.BackColor = Color.White;
+            textBoxSumm_SOA.BackColor = Color.White;
+            textBoxMax_SOA.BackColor = Color.White;
+            textBoxMin_SOA.BackColor = Color.White;
+            textBoxMiddle_SOA.BackColor = Color.White;
+            textBoxCount_SOA.BackColor = Color.White;
+        }
+
     }
 }
