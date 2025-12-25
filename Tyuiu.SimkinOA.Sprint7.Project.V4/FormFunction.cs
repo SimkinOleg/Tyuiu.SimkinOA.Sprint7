@@ -17,6 +17,7 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
         {
             InitializeComponent();
             ApplyColorScheme();
+
         }
 
         private void buttonCloseTut_SOA_Click(object sender, EventArgs e)

@@ -76,6 +76,9 @@
             this.panelTop_SOA.Name = "panelTop_SOA";
             this.panelTop_SOA.Size = new System.Drawing.Size(1109, 92);
             this.panelTop_SOA.TabIndex = 0;
+
+
+
             // 
             // buttonTutorial_SOA
             // 

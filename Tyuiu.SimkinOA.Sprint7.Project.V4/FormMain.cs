@@ -1,5 +1,15 @@
+п»їusing System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tyuiu.SimkinOA.Sprint7.Project.V4.Lib;
+
 namespace Tyuiu.SimkinOA.Sprint7.Project.V4
 {
     public partial class FormMain : Form
@@ -11,7 +21,6 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
         }
 
         public string openFilePath;
-
         DataService ds = new DataService();
 
         private void buttonHelp_SOA_Click(object sender, EventArgs e)
@@ -28,7 +37,6 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
 
         public static string[,] Array(string path)
         {
-
             string data = File.ReadAllText(path);
             data = data.Replace('\n', '\r');
             string[] lines = data.Split(new char[] { '\r' }, StringSplitOptions.RemoveEmptyEntries);
@@ -50,7 +58,6 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                     {
                         continue;
                     }
-
                 }
             }
 
@@ -66,22 +73,16 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             return mtr;
         }
 
-
-
         private void buttonSaveFile_SOA_Click(object sender, EventArgs e)
         {
-            // 1. НАСТРОЙКА ДИАЛОГА (без имени по умолчанию)
-            saveFileDialog_SOA.Filter = "CSV файлы (*.csv)|*.csv|Все файлы (*.*)|*.*";
-            saveFileDialog_SOA.DefaultExt = "csv"; // Расширение по умолчанию
+            saveFileDialog_SOA.Filter = "CSV С„Р°Р№Р»С‹ (*.csv)|*.csv|Р’СЃРµ С„Р°Р№Р»С‹ (*.*)|*.*";
+            saveFileDialog_SOA.DefaultExt = "csv";
             saveFileDialog_SOA.InitialDirectory = @"C:\Users\Desktop";
-            saveFileDialog_SOA.FileName = "NewFile.csv"; // Укажите нормальное имя по умолчанию
+            saveFileDialog_SOA.FileName = "NewFile.csv";
 
-            // 2. ПОКАЗЫВАЕМ ДИАЛОГ И ПРОВЕРЯЕМ РЕЗУЛЬТАТ
             if (saveFileDialog_SOA.ShowDialog() == DialogResult.OK)
             {
                 string pathnew = saveFileDialog_SOA.FileName;
-
-                // 3. СОХРАНЕНИЕ ДАННЫХ
                 FileInfo file = new FileInfo(pathnew);
                 if (file.Exists)
                 {
@@ -106,13 +107,10 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                     str = "";
                 }
 
-                MessageBox.Show("Файл успешно сохранен!", "Успех",
+                MessageBox.Show("Р¤Р°Р№Р» СѓСЃРїРµС€РЅРѕ СЃРѕС…СЂР°РЅРµРЅ!", "РЈСЃРїРµС…",
                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
-
-
 
         private void buttonOpenFile_SOA_Click(object sender, EventArgs e)
         {
@@ -130,7 +128,6 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             {
                 for (int j = 0; j < cols; j++)
                 {
-
                     dataGridViewData_SOA.Rows[i].Cells[j].Value = res[i, j];
                     dataGridViewData_SOA.Columns[j].Width = 100;
                     dataGridViewData_SOA.Rows[i].Height = 25;
@@ -145,8 +142,6 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             buttonSearch_SOA.Enabled = true;
             buttonSaveFile_SOA.Enabled = true;
         }
-
-
 
         private void buttonAddBook_SOA_Click(object sender, EventArgs e)
         {
@@ -192,36 +187,30 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                         {
                             if (i == ID)
                             {
-
-                                {
-                                    dataGridViewData_SOA.Rows[1].Cells[j].Value = res[i, j];
-                                    dataGridViewData_SOA.Columns[j].Width = 100;
-                                    dataGridViewData_SOA.Rows[i].Height = 25;
-                                }
+                                dataGridViewData_SOA.Rows[1].Cells[j].Value = res[i, j];
+                                dataGridViewData_SOA.Columns[j].Width = 100;
+                                dataGridViewData_SOA.Rows[i].Height = 25;
                             }
                             else if (i == 0)
                             {
                                 dataGridViewData_SOA.Rows[i].Cells[j].Value = res[i, j];
                             }
-
                         }
                     }
-
                 }
                 else
                 {
                     dataGridViewData_SOA.Columns.Clear();
                     dataGridViewData_SOA.Rows.Clear();
-                    MessageBox.Show("В базе данных нет такого количества элементов! Загрузите файл заново!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Р’ Р±Р°Р·Рµ РґР°РЅРЅС‹С… РЅРµС‚ С‚Р°РєРѕРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° СЌР»РµРјРµРЅС‚РѕРІ! Р—Р°РіСЂСѓР·РёС‚Рµ С„Р°Р№Р» Р·Р°РЅРѕРІРѕ!", "РћС€РёР±РєР°!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch
             {
                 dataGridViewData_SOA.Columns.Clear();
                 dataGridViewData_SOA.Rows.Clear();
-                MessageBox.Show("Нельзя найти отрицательный или нулевой элемент! Загрузите файл заново!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("РќРµР»СЊР·СЏ РЅР°Р№С‚Рё РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Р№ РёР»Рё РЅСѓР»РµРІРѕР№ СЌР»РµРјРµРЅС‚! Р—Р°РіСЂСѓР·РёС‚Рµ С„Р°Р№Р» Р·Р°РЅРѕРІРѕ!", "РћС€РёР±РєР°!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void buttonTutorial_SOA_Click(object sender, EventArgs e)
@@ -231,57 +220,38 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             buttonOpenFile_SOA.Enabled = true;
         }
 
-
         private void buttonFunction_SOA_Click(object sender, EventArgs e)
         {
             FormFunction formf = new FormFunction();
             formf.pathFunc = path;
             formf.Show();
-
         }
 
         private void ApplyColorScheme()
         {
-            // Фон формы
+            // Р¤РѕРЅ С„РѕСЂРјС‹
             this.BackColor = Color.FromArgb(240, 245, 249);
 
-            // Стиль для всех GroupBox
-            foreach (Control control in this.Controls)
-            {
-                if (control is GroupBox groupBox)
-                {
-                    groupBox.ForeColor = Color.FromArgb(41, 128, 185);
-                    groupBox.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-                }
-            }
+            // 1. РЈР‘РР РђР•Рњ СЃС‚Р°СЂС‹Рµ РїР°РЅРµР»Рё Рё РјРµРЅСЏРµРј СЃС‚СЂСѓРєС‚СѓСЂСѓ
+            panel1.Dock = DockStyle.None;
+            panel2.Dock = DockStyle.None;
 
-            // Панель сверху
+            // 2. Р’Р•Р РҐРќРЇРЇ РџРђРќР•Р›Р¬
             panelTop_SOA.BackColor = Color.FromArgb(52, 152, 219);
+            panelTop_SOA.Dock = DockStyle.Top;
+            panelTop_SOA.Height = 80;
 
-            // ВСЕ КНОПКИ - СИНИЙ ЦВЕТ (#3498DB)
+            // РљРЅРѕРїРєРё РЅР° РІРµСЂС…РЅРµР№ РїР°РЅРµР»Рё
             Color mainButtonColor = Color.FromArgb(52, 152, 219);
-
-            // Панель инструментов
             buttonOpenFile_SOA.BackColor = mainButtonColor;
             buttonSaveFile_SOA.BackColor = mainButtonColor;
-            buttonHelp_SOA.BackColor = mainButtonColor;
-            buttonTutorial_SOA.BackColor = mainButtonColor;
+            buttonHelp_SOA.BackColor = Color.FromArgb(231, 76, 60);
+            buttonTutorial_SOA.BackColor = Color.FromArgb(231, 76, 60);
 
-            // Блок статистики
-            buttonBookMax_SOA.BackColor = mainButtonColor;
-            buttonMax_SOA.BackColor = mainButtonColor;
-            buttonMin_SOA.BackColor = mainButtonColor;
-            buttonMiddle_SOA.BackColor = mainButtonColor;
-            buttonCount_SOA.BackColor = mainButtonColor;
-            buttonFunction_SOA.BackColor = mainButtonColor;
-
-            // Блок поиска
-            buttonSearch_SOA.BackColor = mainButtonColor;
-
-            // Текст на всех кнопках
-            foreach (Control control in panelTop_SOA.Controls)
+            // РЎС‚РёР»СЊ РєРЅРѕРїРѕРє РІРµСЂС…РЅРµР№ РїР°РЅРµР»Рё
+            foreach (Control ctrl in panelTop_SOA.Controls)
             {
-                if (control is Button btn)
+                if (ctrl is Button btn)
                 {
                     btn.ForeColor = Color.White;
                     btn.FlatStyle = FlatStyle.Flat;
@@ -290,30 +260,105 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
                 }
             }
 
-            // Кнопки вне панели тоже стилизуем
-            buttonBookMax_SOA.ForeColor = Color.White;
-            buttonMax_SOA.ForeColor = Color.White;
-            buttonMin_SOA.ForeColor = Color.White;
-            buttonMiddle_SOA.ForeColor = Color.White;
-            buttonCount_SOA.ForeColor = Color.White;
-            buttonFunction_SOA.ForeColor = Color.White;
-            buttonSearch_SOA.ForeColor = Color.White;
+            // 3. Р›Р•Р’РђРЇ РџРђРќР•Р›Р¬ РЎ РљРќРћРџРљРђРњР - РЈР’Р•Р›РР§РР’РђР•Рњ РЁРР РРќРЈ
+            panel1.Location = new Point(0, panelTop_SOA.Height);
+            panel1.Size = new Size(380, this.ClientSize.Height - panelTop_SOA.Height); // РЈРІРµР»РёС‡РёР»Рё СЃ 300 РґРѕ 380
+            panel1.BackColor = Color.FromArgb(41, 128, 185);
 
-            // DataGridView
+            // GroupBox "РЎС‚Р°С‚РёСЃС‚РёРєР°" - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ
+            groupBoxStats_SOA.Location = new Point(15, 20);
+            groupBoxStats_SOA.Size = new Size(350, 400); // РЈРІРµР»РёС‡РёР»Рё СЃ 280 РґРѕ 350
+            groupBoxStats_SOA.ForeColor = Color.White;
+            groupBoxStats_SOA.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // РљРЅРѕРїРєРё СЃС‚Р°С‚РёСЃС‚РёРєРё - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ РєРЅРѕРїРѕРє
+            int buttonY = 30;
+            int buttonWidth = 320; // РЈРІРµР»РёС‡РёР»Рё СЃ 250 РґРѕ 320
+
+            Button[] statButtons = { buttonBookMax_SOA, buttonMax_SOA, buttonMin_SOA,
+                           buttonMiddle_SOA, buttonCount_SOA };
+            string[] buttonTexts = { "рџ“Љ РЎСѓРјРјР° РєРЅРёРі", "рџ“€ РњР°РєСЃ. С†РµРЅР°", "рџ“‰ РњРёРЅ. С†РµРЅР°",
+                           "вљ–пёЏ РЎСЂРµРґРЅСЏСЏ С†РµРЅР°", "рџ‘Ґ РљРѕР»-РІРѕ С‡РёС‚Р°С‚РµР»РµР№" };
+
+            for (int i = 0; i < statButtons.Length; i++)
+            {
+                statButtons[i].Location = new Point(15, buttonY);
+                statButtons[i].Size = new Size(buttonWidth, 45);
+                statButtons[i].BackColor = Color.FromArgb(52, 152, 219);
+                statButtons[i].ForeColor = Color.White;
+                statButtons[i].FlatStyle = FlatStyle.Flat;
+                statButtons[i].FlatAppearance.BorderSize = 0;
+                statButtons[i].Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                statButtons[i].Text = buttonTexts[i];
+                buttonY += 55;
+            }
+
+            // РўРµРєСЃС‚РѕРІС‹Рµ РїРѕР»СЏ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ
+            TextBox[] resultBoxes = { textBoxSumm_SOA, textBoxMax_SOA, textBoxMin_SOA,
+                            textBoxMiddle_SOA, textBoxCount_SOA };
+            int textBoxY = buttonY + 10;
+
+            for (int i = 0; i < resultBoxes.Length; i++)
+            {
+                resultBoxes[i].Location = new Point(15, textBoxY);
+                resultBoxes[i].Size = new Size(buttonWidth, 30);
+                resultBoxes[i].BackColor = Color.White;
+                resultBoxes[i].ForeColor = Color.Black;
+                resultBoxes[i].Font = new Font("Segoe UI", 9);
+                textBoxY += 35;
+            }
+
+            // GroupBox "РџРѕРёСЃРє" - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ
+            groupBox1.Location = new Point(15, textBoxY + 20);
+            groupBox1.Size = new Size(350, 180); // РЈРІРµР»РёС‡РёР»Рё СЃ 280 РґРѕ 350
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Р­Р»РµРјРµРЅС‚С‹ РїРѕРёСЃРєР° - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ
+            label2.Location = new Point(15, 30);
+            label2.ForeColor = Color.White;
+            label2.Font = new Font("Segoe UI", 10);
+
+            textBoxNumber_SOA.Location = new Point(15, 60);
+            textBoxNumber_SOA.Size = new Size(320, 30); // РЈРІРµР»РёС‡РёР»Рё СЃ 250 РґРѕ 320
+            textBoxNumber_SOA.BackColor = Color.White;
+
+            buttonSearch_SOA.Location = new Point(15, 100);
+            buttonSearch_SOA.Size = new Size(320, 45); // РЈРІРµР»РёС‡РёР»Рё СЃ 250 РґРѕ 320
+            buttonSearch_SOA.BackColor = Color.FromArgb(46, 204, 113);
+            buttonSearch_SOA.ForeColor = Color.White;
+            buttonSearch_SOA.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            buttonSearch_SOA.Text = "рџ”Ќ РќР°Р№С‚Рё С‡РёС‚Р°С‚РµР»СЏ";
+            buttonSearch_SOA.FlatStyle = FlatStyle.Flat;
+            buttonSearch_SOA.FlatAppearance.BorderSize = 0;
+
+            // 4. РљРЅРѕРїРєР° "Р“СЂР°С„РёРєРё" - СѓРІРµР»РёС‡РёРІР°РµРј С€РёСЂРёРЅСѓ
+            buttonFunction_SOA.Location = new Point(15, panel1.Height - 100);
+            buttonFunction_SOA.Size = new Size(350, 60); // РЈРІРµР»РёС‡РёР»Рё СЃ 280 РґРѕ 350
+            buttonFunction_SOA.BackColor = Color.FromArgb(155, 89, 182);
+            buttonFunction_SOA.ForeColor = Color.White;
+            buttonFunction_SOA.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            buttonFunction_SOA.Text = "рџ“€ РџРћРљРђР—РђРўР¬ Р“Р РђР¤РРљР";
+            buttonFunction_SOA.FlatStyle = FlatStyle.Flat;
+            buttonFunction_SOA.FlatAppearance.BorderSize = 0;
+
+            // 5. РћРЎРќРћР’РќРђРЇ РћР‘Р›РђРЎРўР¬ РЎ Р”РђРќРќР«РњР - СѓРјРµРЅСЊС€Р°РµРј С€РёСЂРёРЅСѓ РёР·-Р·Р° СѓРІРµР»РёС‡РµРЅРёСЏ Р»РµРІРѕР№ РїР°РЅРµР»Рё
+            panel2.Location = new Point(panel1.Width, panelTop_SOA.Height);
+            panel2.Size = new Size(this.ClientSize.Width - panel1.Width,
+                                 this.ClientSize.Height - panelTop_SOA.Height);
+            panel2.BackColor = Color.FromArgb(240, 245, 249);
+
+            // DataGridView РЅР° РІСЃСЋ РїСЂР°РІСѓСЋ РѕР±Р»Р°СЃС‚СЊ
+            dataGridViewData_SOA.Dock = DockStyle.Fill;
             dataGridViewData_SOA.BackgroundColor = Color.FromArgb(240, 245, 249);
             dataGridViewData_SOA.GridColor = Color.FromArgb(200, 200, 200);
             dataGridViewData_SOA.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
             dataGridViewData_SOA.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridViewData_SOA.ColumnHeadersHeight = 40;
+            dataGridViewData_SOA.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewData_SOA.EnableHeadersVisualStyles = false;
-
-            // Текстовые поля
-            textBoxNumber_SOA.BackColor = Color.White;
-            textBoxSumm_SOA.BackColor = Color.White;
-            textBoxMax_SOA.BackColor = Color.White;
-            textBoxMin_SOA.BackColor = Color.White;
-            textBoxMiddle_SOA.BackColor = Color.White;
-            textBoxCount_SOA.BackColor = Color.White;
+            dataGridViewData_SOA.RowHeadersVisible = false;
+            dataGridViewData_SOA.Font = new Font("Segoe UI", 10);
         }
-
     }
 }
