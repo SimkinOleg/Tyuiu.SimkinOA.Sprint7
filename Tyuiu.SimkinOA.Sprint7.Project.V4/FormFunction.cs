@@ -103,7 +103,11 @@ namespace Tyuiu.SimkinOA.Sprint7.Project.V4
             chartPrice_SOA.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(41, 128, 185);
             chartPrice_SOA.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(41, 128, 185);
 
-            // Заголовок графика
+            if (chartPrice_SOA.Titles.Count == 0)
+            {
+                chartPrice_SOA.Titles.Add(""); 
+            }
+            
             chartPrice_SOA.Titles[0].ForeColor = Color.FromArgb(41, 128, 185);
 
             // Легенда
